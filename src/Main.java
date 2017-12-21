@@ -5,6 +5,8 @@ public class Main {
 	private static Scanner scan = new Scanner(System.in);
 	private static char player = 'X';
 	private static char board[][] = new char[3][3];
+	private static int sor;
+	private static int oszlop;
 	
 	public static void main(String[] args) {
 		for(int i = 0; i < board.length; i++) {
@@ -36,17 +38,22 @@ public class Main {
 		
 		while(playing) {
 			
+			boolean ex = true;
+			System.out.println("Player " + player + " please type in the row and the column: ");
 			
-			
-			int sor = scan.nextInt()-1;
-			int oszlop = scan.nextInt()-1;
-			
-			if(sor > 2 || oszlop > 2 || sor < 0 || oszlop < 0) {
-				System.out.println("Invalid step!");
-				playing = false;
+			while(ex) {
+			try {
+			sor = scan.nextInt()-1;
+			oszlop = scan.nextInt()-1;
+			board[sor][oszlop] = player;
+			ex = false;
+			}catch(ArrayIndexOutOfBoundsException e) {
+				System.out.println("Values should be from 1 to 3! Player " + player + " 's turn!");
+				printBoard();
 			}
 			
-			board[sor][oszlop] = player;
+			}
+			
 			
 			printBoard();
 			
